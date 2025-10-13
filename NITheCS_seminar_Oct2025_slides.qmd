@@ -11,7 +11,7 @@ format:
     #multiplex: true
     code-copy: true
     code-link: true
-    theme: [formatting/SU.scss]
+    theme: [formatting/RJStudio.scss]
     show-slide-number: all
     code-overflow: scroll
     highlight-style: a11y
@@ -64,9 +64,9 @@ library(biplotEZ) ; library(gganimate)
 ## Home life {.hide-logo}
 
 ::: {layout="[45,-5,45]"}
-![](images/family.jpg)
+![](img_personal/family.jpg)
 
-![](images/Marmite.jpg)
+![](img_personal/Marmite.jpg)
 :::
 
 
@@ -82,7 +82,8 @@ Ganey R & Nienkemper-Swanepoel J (2025). *moveEZ: Animated Biplots*.moveEZ, R pa
 
 ## The team {.hide-logo}
 
-![](images/Visitors.jpg){fig-align="center" width="60%"}
+![](img_personal/Visitors.jpg){fig-align="center" width="60%"}
+
 
 # Background
 
@@ -383,7 +384,7 @@ Available options include:
 
 -   `"xy"` – Reflect about both axes
 
-Both `align.time` and `reflect` can be vectors when alignment is needed at multiple time points with each entry in `reflect` corresponds to a time point in `align.time`.
+Both `align.time` and `reflect` can be vectors when alignment is needed at multiple time points with each entry in `reflect` corresponding to a time point in `align.time`.
 :::
 
 ## `moveplot2()`
@@ -394,24 +395,30 @@ Both `align.time` and `reflect` can be vectors when alignment is needed at multi
 bp |> moveplot2(time.var = "Year", group.var = "Region", hulls = TRUE, move = FALSE)
 ```
 
-![](animations/bp3.gif){fig-align="center" width="60%"}
-
-```{r echo=FALSE, eval=FALSE}
+```{r echo=FALSE, eval=TRUE}
 #| fig-width: 9
 #| fig-height: 6
-bp3 <- bp |> moveplot2(time.var = "Year", group.var = "Region", hulls = TRUE, move = FALSE)
-anim_save("animations/bp3.gif", animation = last_animation())
+bp |> moveplot2(time.var = "Year", group.var = "Region", hulls = TRUE, move = FALSE)
 ```
+
 
 ## `moveplot2()`
 
 Here, the biplot is aligned at the 1950 time point by reflection about the x-axis.
 
+```{r echo=FALSE, eval=FALSE}
+#| fig-width: 9
+#| fig-height: 6
+bp4 <- bp |> 
+  moveplot2(time.var = "Year", group.var = "Region", hulls = TRUE, move = TRUE, align.time = "1950", reflect = "x")
+anim_save("animations/bp4.gif", animation = last_animation())
+```
+
 ```{r echo=TRUE, eval=FALSE}
 #| fig-width: 9
 #| fig-height: 6
 bp |> 
-  moveplot2(time.var = "Year", group.var = "Region", hulls = TRUE,  move = TRUE, align.time = "1950", reflect = "x")
+  moveplot2(time.var = "Year", group.var = "Region", hulls = TRUE, move = TRUE, align.time = "1950", reflect = "x")
 ```
 
 ![](animations/bp4.gif){fig-align="center" width="60%"}
@@ -581,6 +588,25 @@ results$bias.plot
 results$fit.plot
 ```
 
+# Coal emissions Data (still to add)
+
+::::: columns
+::: {.column width="45%"}
+-   **Period:** 
+-   **Regions:**
+-   **IPCC**: 
+:::
+
+::: {.column width="45%"}
+-   **Variables:**
+    1.  Accumulated precipitation (**AccPrec**)\
+    2.  Daily evaporation (**DailyEva**)\
+    3.  Mean temperature (**Temp**)\
+    4.  Soil moisture (**SoilMois**)\
+    5.  Wind speed (**Wind**)\
+    6.  Standardised precipitation index 6-month (**SPI6**)\
+:::
+:::::
 
 ## Acknowledgements
 
