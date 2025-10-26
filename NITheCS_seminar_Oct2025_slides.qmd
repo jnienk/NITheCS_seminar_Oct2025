@@ -762,6 +762,12 @@ moveplot(bp1_oven,time.var = "Oven", group.var = "Wood", hulls=FALSE, move=FALSE
 moveplot(bp1_wood, time.var = "Phase", group.var = "Wood", hulls=FALSE, move=FALSE, scale.var = 10)
 ```
 
+## Change in emission factors over the phase
+
+```{r, echo = FALSE}
+moveplot2(bp1_wood, time.var = "Phase", group.var = "Wood", hulls=FALSE, move=FALSE, scale.var = 10)
+```
+
 ## Emission concentration levels
 :::columns
 ::: {.column width="50%"}
