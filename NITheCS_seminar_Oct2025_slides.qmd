@@ -1,7 +1,7 @@
 ---
-title: "moveEZ: Animated biplots"
-subtitle: "Johané Nienkemper-Swanepoel & Raeesa Ganey"
-author: "<br>Centre for Multi-Dimensional Data Visualisation (MuViSU).<br>  Department of Statistics and Actuarial Science, Stellenbosch University.<br> School of Statistics and Actuarial Science, University of the Witwatersrand, Johannesburg, South Africa.<br>National Institute for Theoretical and Computational Sciences.<br><br><br>**NITheCS seminar series: 27 October 2025**"
+title: "Dynamic biplot visualisations with  `moveEZ`"
+author: "Johané Nienkemper-Swanepoel & Raeesa Ganey<br>`nienkemperj@sun.ac.za` & `raeesa.ganey@wits.ac.za`<br><br>"
+subtitle: "<br>Centre for Multi-Dimensional Data Visualisation (MuViSU).<br>  Department of Statistics and Actuarial Science, Stellenbosch University.<br> School of Statistics and Actuarial Science, University of the Witwatersrand, Johannesburg, South Africa.<br>National Institute for Theoretical and Computational Sciences.<br><br><br>**NITheCS seminar series: 27 October 2025**"
 format: 
   revealjs:
     #incremental: true
@@ -21,6 +21,10 @@ format:
     css: [formatting/custom.css]
     embed-resources: true
     self-contained: true
+title-slide-attributes: 
+  data-background-image: "images/SU_wits.png"
+  data-background-size: 15%
+  data-background-position: 50% 90%
 resources: 
   - animations/**
 execute:
@@ -57,9 +61,13 @@ opts_chunk$set(
 )
 
 # libraries
-library(biplotEZ) ; library(gganimate) 
+library(biplotEZ) ; library(gganimate) ; library(ggplot2) ; library(moveEZ) ; library(dplyr) ; library(readr)
 
 ```
+
+## The team {.hide-logo}
+
+![](img_personal/Visitors.jpg){fig-align="center" width="60%"}
 
 ## Home life {.hide-logo}
 
@@ -80,12 +88,8 @@ An `R` package for animated biplots.
 
 Ganey R & Nienkemper-Swanepoel J (2025). *moveEZ: Animated Biplots*.moveEZ, R package version 1.1.1, <https://CRAN.R-project.org/package=moveEZ>.
 
-## The team {.hide-logo}
 
-![](img_personal/Visitors.jpg){fig-align="center" width="60%"}
-
-
-# Background
+## Background
 
 -   Consider a dataset ${\bf{X}}$ comprising of $n$ observations and $p$ continuous variables, along with an additional variable representing "time".
 
@@ -95,7 +99,7 @@ Ganey R & Nienkemper-Swanepoel J (2025). *moveEZ: Animated Biplots*.moveEZ, R pa
 
 -   The goal of `moveEZ` is to address this challenge by animating a single biplot across the levels of the time variable, allowing for dynamic visualisation of temporal or sequential changes in the data.
 
-# Biplots
+## Biplots
 
 ```{=html}
 <ul style="font-size: 1.2em; line-height: 1.4em; list-style-position: outside; padding-left: 0.5em;">
@@ -142,7 +146,7 @@ Ganey R & Nienkemper-Swanepoel J (2025). *moveEZ: Animated Biplots*.moveEZ, R pa
 </div>
 ```
 
-# Climate Data
+## Climate Data
 
 ::::: columns
 ::: {.column width="45%"}
@@ -184,7 +188,7 @@ datatable(display_data, rownames = FALSE,
           options = list(pageLength = 10, dom = "tp"))
 ```
 
-# PCA biplot
+## PCA biplot
 
 ::::: columns
 ::: {.column width="45%"}
@@ -373,7 +377,6 @@ Separate biplots are constructed for each time slice of the data. Both the sampl
 
 ## `moveplot2()`
 
-::: font-large
 Additional enhancements include reflections to align the biplots if needed. <br>
 
 Available options include:
@@ -385,7 +388,6 @@ Available options include:
 -   `"xy"` – Reflect about both axes
 
 Both `align.time` and `reflect` can be vectors when alignment is needed at multiple time points with each entry in `reflect` corresponding to a time point in `align.time`.
-:::
 
 ## `moveplot2()`
 
@@ -400,7 +402,6 @@ bp |> moveplot2(time.var = "Year", group.var = "Region", hulls = TRUE, move = FA
 #| fig-height: 6
 bp |> moveplot2(time.var = "Year", group.var = "Region", hulls = TRUE, move = FALSE)
 ```
-
 
 ## `moveplot2()`
 
@@ -433,7 +434,6 @@ anim_save("animations/bp4.gif", animation = last_animation())
 
 ## Dynamic Frame: configurative matching
 
-::: presentation-font-smaller
 -   As before, separate biplots are constructed for each time slice of the data.
 
 -   Now, the biplots are aligned according to a specific **target**:
@@ -447,7 +447,6 @@ anim_save("animations/bp4.gif", animation = last_animation())
     -   translation, scaling, rotation and reflection
 
 -   Results in an aligned animation to expose subtle temporal changes that occur over time.
-:::
 
 ## GPA methodology
 
@@ -468,9 +467,8 @@ Borg, I. & Groenen, P. 2005. Modern Multidimensional Scaling. 2nd ed. United Sta
 :::
 :::::
 
-# `moveplot3()`
+## `moveplot3()`
 
-::: presentation-font-smaller
 This function shares the same arguments as `moveplot()` and `moveplot2()`, with the addition of the `target` argument:
 
 -   `target = NULL` - use the average of available biplots
@@ -486,9 +484,8 @@ library(DT)
 datatable(display_data, rownames = FALSE, 
           options = list(pageLength = 5, dom = "tp"))
 ```
-:::
 
-# `moveplot3()`
+## `moveplot3()`
 
 ```{r echo=TRUE, eval=FALSE}
 #| fig-width: 9
@@ -506,7 +503,7 @@ bp5 <- bp |> moveplot3(time.var = "Year", group.var = "Region", hulls = TRUE, mo
 anim_save("animations/bp5.gif", animation = last_animation())
 ```
 
-# `moveplot3()`
+## `moveplot3()`
 
 ```{r echo=TRUE, eval=FALSE}
 #| fig-width: 9
@@ -526,7 +523,6 @@ anim_save("animations/bp6.gif", animation = last_animation())
 
 ## Quantifying the movement
 
-::: presentation-font-smaller
 In conjunction with `moveplot3()`, five measures of comparison can be calculated to measure the difference between the target display and the display representing every other time point.
 
 -   Procrustes Statistic (PS)
@@ -536,7 +532,6 @@ In conjunction with `moveplot3()`, five measures of comparison can be calculated
 -   Root Mean Squared Bias (RMSB)
 
 This can be extracted as tables or line graphs.
-:::
 
 ```{r, eval = FALSE, output = FALSE}
 results <- bp |> moveplot3(time.var = "Year", group.var = "Region", hulls = TRUE, move = FALSE, 
@@ -572,7 +567,7 @@ print(knitr::kable(results$eval.list[7:8], format = "simple"))
 :::
 :::::
 
-# `moveplot3()`
+## `moveplot3()`
 
 ```{r}
 #| fig-width: 9
@@ -580,7 +575,7 @@ print(knitr::kable(results$eval.list[7:8], format = "simple"))
 results$bias.plot
 ```
 
-# `moveplot3()`
+## `moveplot3()`
 
 ```{r}
 #| fig-width: 9
@@ -588,36 +583,236 @@ results$bias.plot
 results$fit.plot
 ```
 
-# Coal emissions Data (still to add)
+# Statistical Analysis of Emissions and Performance of a Wood-Fuelled Stove with Integrated Oven Using Local Hardwoods
+
+-   Prof. RLJ Coetzer
+
+    -   Centre of Excellence in Carbon based Fuels, School of Chemical and Minerals Engineering. Focus Area for Pure and Applied Analytics, North-West University (NWU). MuViSU.
+
+-   Prof. HWJP Neomagus (NWU)
+
+    -   Centre of Excellence in Carbon based Fuels, School of Chemical and Minerals Engineering, NWU.
+
+-   Dr R Ganey (Wits and MuViSU)
+
+-   Dr J Nienkemper-Swanepoel (SU and MuViSU)
+
+## Rationale
+
+-   Wood is a preferred energy source in South African homes.
+-   Household air pollution (HAP) holds a major risk.
+-   This study investigates the emissions and cooking efficiency of a novel stove **FLAMINGo Stove**.
+
+::::: columns
+::: {.column width="30%"}
+ ![](img_personal/woodstove_diagram.png){height="20%"}
+:::
+::: {.column width="30%"}
+ ![](img_personal/woodstove2.png){height="20%"}
+:::
+::: {.column width="30%"}
+ ![](img_personal/woodstove1.png){height="20%"}
+:::
+::::: 
+
+
+## Measurements
 
 ::::: columns
 ::: {.column width="45%"}
--   **Period:** 
--   **Regions:**
--   **IPCC**: 
+Measurements were performed every 10 seconds with a total experimental time of approximately 90 minutes. The following paramaters were measured directly:
+
+-   Mass of the stove and fuel.
+
+-   Dry gas fractions of 5 gases ($NO$, $SO_2$, $CO$, $CO_2$ and $O_2$) diluted and undiluted.
+
+-   Various temperatures in the oven and chimney.
+
+-   Pot temperatures.
+
+-   Particulate matter (PM) concentration.
+
+:::
+
+::: {.column width="5%"}
 :::
 
 ::: {.column width="45%"}
--   **Variables:**
-    1.  Accumulated precipitation (**AccPrec**)\
-    2.  Daily evaporation (**DailyEva**)\
-    3.  Mean temperature (**Temp**)\
-    4.  Soil moisture (**SoilMois**)\
-    5.  Wind speed (**Wind**)\
-    6.  Standardised precipitation index 6-month (**SPI6**)\
+
+
+Factors in the full factorial design ($4 \times 2 \times 3$):
+
+-   4 different wood species: Sickle Bush (SB), Mopane (M), Leadwood (LW), Black Wattle (BW)
+
+-   Oven in use or not.
+
+-   Power phase: low, medium, high.
 :::
-:::::
+::::: 
+
+## Objectives
+
+-   Understanding the process through targeted  visualisation.
+-   Correlation of emission factors.
+-   Effect of the different wood species.
+-   Effect of the oven component.
+-   Correlation of emission concentrations with the stove temperatures.
+
+## PCA biplot of emission factors
+
+```{r, echo = FALSE}
+# 1. Dat.emfacts
+dat.emfacts <- read_csv("data/dat.emfacts.csv")
+
+dat.emfacts <- dat.emfacts |> mutate(Phase = factor(Phase),
+                                     Oven = as.factor(Oven),
+                                     Wood = as.factor(Wood))
+
+new_order <- c("L", "M", "H")
+dat.emfacts$Phase <- factor(dat.emfacts$Phase, levels = new_order)
+
+
+# 2. Dat.emfactstemp.resp
+
+dat.emfactstemp.resp <- read_csv("data/dat.emfactstemp.resp.csv")
+dat.emfactstemp.resp <- dat.emfactstemp.resp |> mutate(across(c(Oven, Wood, Phase, time), as.factor))
+
+new_order <- c("Low", "Medium", "High")
+dat.emfactstemp.resp$Phase <- factor(dat.emfactstemp.resp$Phase, levels = new_order)
+
+# 17 continuous variables:
+# temperature variables - every 10 seconds
+# IO_02L_Avg
+# UO_02_Avg
+# AO_02_Avg
+# IO_04R_Avg
+# FB_01_Avg
+# IO_01T_Avg
+# SA_01_Avg
+# P_01_Avg
+# AO_01_Avg
+# Roofline
+# Chimney
+# concentration of the components [of interest]
+# NO  *
+# SO2 *
+# CO  *
+# CO2 *
+# O2  *
+# PM (mg/m3) *
+
+
+# 3. Dat.thermefftemps.resp
+
+dat.thermefftemps.resp <- read_csv("data/dat.thermefftemps.resp.csv")
+dat.thermefftemps.resp <- dat.thermefftemps.resp |> mutate(across(c(Oven, Wood, Phase, time), as.factor))
+
+new_order <- c("Low", "Medium", "High")
+dat.thermefftemps.resp$Phase <- factor(dat.thermefftemps.resp$Phase, levels = new_order)
+
+# 13 continuous variables:
+# Temperature
+# IO_02L_Avg
+# UO_02_Avg
+# AO_02_Avg
+# IO_04R_Avg
+# FB_01_Avg
+# IO_01T_Avg
+# SA_01_Avg
+# P_01_Avg
+# AO_01_Avg
+# Roofline
+# Chimney
+# Calculated thermal efficiency [cooking efficiency]
+# T_eff_Pot_1(%) *
+# T_eff_Pot_2(%) *
+
+# 3 categorical variables: Phase (H,M,L), Oven (N,O), Wood (BW, LW, M, SB))
+
+```
+
+
+```{r echo=FALSE}
+#| message: false
+#| warning: false
+#| fig-height: 6
+#| fig-width: 6
+dat.emfacts <- dat.emfacts |> mutate(faketime = as.factor(rep("Emission factors",72)))
+bp1_wood <- biplot(data = dat.emfacts,
+             group.aes = dat.emfacts$Wood, scale=TRUE) |> PCA()
+
+moveplot(bp1_wood, time.var = "faketime", group.var = "Wood", move=FALSE, hulls=FALSE) 
+#bp_move + coord_fixed(ratio = 1) + theme(aspect.ratio = 1)
+```
+
+
+## Effect of the oven on emission factors
+
+```{r, echo = FALSE}
+bp1_oven <- biplot(data = dat.emfacts,
+                   group.aes = dat.emfacts$Oven,scale=TRUE) |> PCA() |> samples(col=c("#F8766D","#00BFC4"))
+
+# Oven
+moveplot(bp1_oven,time.var = "Oven", group.var = "Wood", hulls=FALSE, move=FALSE, scale.var = 10)
+```
+
+## Change in emission factors over the phase
+
+```{r, echo = FALSE}
+moveplot(bp1_wood, time.var = "Phase", group.var = "Wood", hulls=FALSE, move=FALSE, scale.var = 10)
+```
+
+## Emission concentration levels
+:::columns
+::: {.column width="50%"}
+```{r, echo = FALSE}
+#| fig-width: 6
+#| fig-height: 6
+dat.emfactstemp.resp <- dat.emfactstemp.resp |> mutate(faketime = as.factor(rep("Temperature",1944)))
+
+bp2_wood <- biplot(data = dat.emfactstemp.resp,
+                   group.aes = dat.emfactstemp.resp$Wood,scale=TRUE) |> PCA()
+moveplot(bp2_wood,time.var = "faketime", group.var = "Wood", move=FALSE, hulls=FALSE, scale.var = 20) 
+#bp2_move + coord_fixed(ratio = 1) + theme(aspect.ratio = 1)
+```
+:::
+
+::: {.column width="50%"}
+![](img_personal/em_vars.jpg){width="120%"}
+:::
+:::
+
+## Emission concentration levels per phase
+
+```{r echo=FALSE, eval=FALSE}
+#| fig-width: 9
+#| fig-height: 6
+bp_eff_ph <- moveplot(bp2_wood,time.var = "Phase", group.var = "Wood", move=TRUE, hulls=FALSE,
+         scale.var = 20, shadow = TRUE)
+anim_save("animations/bp_eff_ph.gif", animation = last_animation())
+```
+
+![](animations/bp_eff_ph.gif){fig-align="center" width="60%"}
+
+## Emission concentration levels over time
+
+```{r echo=FALSE, eval=FALSE}
+#| fig-width: 9
+#| fig-height: 6
+bp_eff_time <- moveplot(bp2_wood,time.var = "time", group.var = "Wood", move=TRUE, hulls=FALSE,
+         scale.var = 20, shadow = TRUE)
+anim_save("animations/bp_eff_tim.gif", animation = last_animation())
+```
+
+![](animations/bp_eff_tim.gif){fig-align="center" width="60%"}
+
 
 ## Acknowledgements
 
-::: font-large
 We acknowledge the support and contributions of:
 
 -   **Dianne Cook** - Monash University
 
     -   **NGA(MaSS)** - funding for this collaboration and visit
 
--   [Emi Tanaka](https://github.com/emitanaka/talks/tree/master/Toronto2022) - slide inspiration
-
--   [Ursula Laa](https://github.com/uschiLaa/dssv25) - slide inspiration
-:::
+-   [github.com/jthomasmock/arrow-dplyr](github.com/jthomasmock/arrow-dplyr) - slide inspiration
