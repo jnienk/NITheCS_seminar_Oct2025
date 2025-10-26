@@ -789,10 +789,10 @@ moveplot(bp2_wood,time.var = "faketime", group.var = "Wood", move=FALSE, hulls=F
 #| fig-height: 6
 bp_eff_ph <- moveplot(bp2_wood,time.var = "Phase", group.var = "Wood", move=TRUE, hulls=FALSE,
          scale.var = 20, shadow = TRUE)
-anim_save("animations/bp_eff_ph.gif", animation = last_animation())
+anim_save("img_personal/bp_eff_ph.gif", animation = last_animation())
 ```
 
-![](animations/bp_eff_ph.gif){fig-align="center" width="60%"}
+![](img_personal/bp_eff_ph.gif){fig-align="center" width="60%"}
 
 ## Emission concentration levels over time
 
@@ -801,10 +801,10 @@ anim_save("animations/bp_eff_ph.gif", animation = last_animation())
 #| fig-height: 6
 bp_eff_time <- moveplot(bp2_wood,time.var = "time", group.var = "Wood", move=TRUE, hulls=FALSE,
          scale.var = 20, shadow = TRUE)
-anim_save("animations/bp_eff_tim.gif", animation = last_animation())
+anim_save("img_personal/bp_eff_tim.gif", animation = last_animation())
 ```
 
-![](animations/bp_eff_tim.gif){fig-align="center" width="60%"}
+![](img_personal/bp_eff_tim.gif){fig-align="center" width="60%"}
 
 
 ## Acknowledgements
