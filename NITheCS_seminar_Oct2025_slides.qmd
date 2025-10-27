@@ -190,8 +190,14 @@ datatable(display_data, rownames = FALSE,
 
 ## PCA biplot
 
+<img src="images/biplotEZ.png" height="120px" style="vertical-align:middle;"/>
+
 ::::: columns
 ::: {.column width="45%"}
+
+::: info-box
+`biplotEZ` - pronounced **biplot easy**
+:::
 ```{r}
 #| label: plot-left
 #| eval: false
@@ -203,6 +209,7 @@ bp <- biplot(Africa_climate, scaled = TRUE) |>
   axes(col="black") |> 
   plot()
 ```
+Lubbe S, le Roux N, Nienkemper-Swanepoel J, Ganey R, Buys R, Adams Z, Manefeldt P (2025). *biplotEZ: EZ-to-Use Biplots*. R package version 2.3, <https://github.com/MuViSU/biplotEZ>.
 :::
 
 ::: {.column width="55%"}
@@ -589,7 +596,7 @@ results$fit.plot
 
     -   Centre of Excellence in Carbon based Fuels, School of Chemical and Minerals Engineering. Focus Area for Pure and Applied Analytics, North-West University (NWU). MuViSU.
 
--   Prof. HWJP Neomagus (NWU)
+-   Prof. HWJP Neomagus
 
     -   Centre of Excellence in Carbon based Fuels, School of Chemical and Minerals Engineering, NWU.
 
@@ -817,7 +824,7 @@ anim_save("img_personal/bp_eff_tim.gif", animation = last_animation())
 
 We acknowledge the support and contributions of:
 
--   **Dianne Cook** - Monash University
+-   **Dianne Cook** - Monash University, Melbourne (Australia).
 
     -   **NGA(MaSS)** - funding for this collaboration and visit
 
