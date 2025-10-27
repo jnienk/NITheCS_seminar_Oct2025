@@ -281,7 +281,7 @@ bp |> moveplot(time.var = "Year", group.var = "Region", hulls = FALSE, move = FA
 ```{r echo=TRUE, eval=FALSE}
 #| fig-width: 9
 #| fig-height: 6
-bp1 |> moveplot(time.var = "Year", group.var = "Region", hulls = TRUE, move = TRUE)
+bp |> moveplot(time.var = "Year", group.var = "Region", hulls = TRUE, move = TRUE)
 ```
 
 ![](animations/bp1.gif){fig-align="center" width="60%"}
@@ -756,13 +756,13 @@ bp1_oven <- biplot(data = dat.emfacts,
 moveplot(bp1_oven,time.var = "Oven", group.var = "Wood", hulls=FALSE, move=FALSE, scale.var = 10)
 ```
 
-## Change in emission factors over the phase
+## Change in emission factors over the phase: fixed variable frame
 
 ```{r, echo = FALSE}
 moveplot(bp1_wood, time.var = "Phase", group.var = "Wood", hulls=FALSE, move=FALSE, scale.var = 10)
 ```
 
-## Change in emission factors over the phase
+## Change in emission factors over the phase: dynamic variable frame
 
 ```{r, echo = FALSE}
 moveplot2(bp1_wood, time.var = "Phase", group.var = "Wood", hulls=FALSE, move=FALSE, scale.var = 10)
@@ -821,4 +821,4 @@ We acknowledge the support and contributions of:
 
     -   **NGA(MaSS)** - funding for this collaboration and visit
 
--   [github.com/jthomasmock/arrow-dplyr](github.com/jthomasmock/arrow-dplyr) - slide inspiration
+-   [Tom Mock](https://github.com/jthomasmock/arrow-dplyr) - slide inspiration
